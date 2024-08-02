@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        function redirectToApp() {
+            var params = new URLSearchParams(window.location.search);
+            var androidLink = params.get('android');
+            var iosLink = params.get('ios');
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android/i.test(userAgent)) {
+                window.location.href = androidLink;
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = iosLink;
+            } else {
+                window.location.href = "https://yourwebsite.com";
+            }
+        }
+    </script>
+</head>
+<body onload="redirectToApp()">
+    <p>Redirecting to the appropriate app store...</p>
+</body>
+</html>
